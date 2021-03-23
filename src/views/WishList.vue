@@ -1,21 +1,25 @@
 <template>
-  <div class="home">
+  <div class="wishlist">
     <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
   </div>
 </template>
 
 <script>
-import Books from '../components/Books.vue';
+import Books from "../components/Books.vue";
 export default {
-  name: "Home",
+  name: "WishList",
   components: {
     Books,
   },
   data() {
     return {
-      books: this.$root.$data.books,
-      reviewpage: false,
+      reviewpage: false 
+    }
+  },
+  computed: {
+    books() {
+      return this.$root.$data.books.filter();
     }
   }
-};
+}
 </script>

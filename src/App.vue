@@ -1,12 +1,27 @@
 <template>
   <div id="app">
+    <h1>My Library</h1>
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/wishlist">Wish List</router-link> |
+      <router-link to="/readbooks">Read Books</router-link> |
+      <router-link to="/reviews">Reviews</router-link>
     </div>
     <router-view />
+    <div id="footer">
+      <h2>Resources</h2>
+        <ul>
+          <li><a href="https://github.com/BYU-CS-260-Winter-2021/lab-1-photography-website-carlosevelo">GitHub</a></li>
+        </ul>
+    </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+}
+</script>
 
 <style>
 #app {
@@ -28,5 +43,15 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#footer {
+  display: grid;
+  justify-content: center;
+}
+#footer li {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
 }
 </style>
