@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     books() {
-      return this.$root.$data.books.filter();
+      return this.$root.$data.books;
     }
   }
   }
