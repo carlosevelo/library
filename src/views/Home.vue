@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h2>All Books</h2>
     <div class="addBook">
       <button @click="addBookView">
         <span>Add New Book</span>

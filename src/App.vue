@@ -30,29 +30,38 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: rgb(232, 243, 255);
+  padding-top: 10px;
 }
 
 #nav {
   padding: 30px;
+  background-color: rgb(44, 44, 44);
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #c6e3ff;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #5ea4e9;
 }
 
 #footer {
   display: grid;
   justify-items: center;
   margin-top: 15px;
+  background-color: rgb(44, 44, 44);
+  color: azure;
+  padding-bottom: 20px;
 }
 #footer ul {
-  text-decoration: none;
   list-style: none;
   padding: 0;
+  color: azure;
+}
+#footer a {
+  color: #c6e3ff;  
 }
 </style>

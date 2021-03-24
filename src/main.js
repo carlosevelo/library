@@ -21,8 +21,8 @@ let data = {
       published: 2009,
       genre: "Religion & Spirituality",
       pages: 224,
-      isRead: true,
-      review: "A super good book."
+      isRead: false,
+      review: ""
     },
   ],
 }

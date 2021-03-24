@@ -1,6 +1,9 @@
 <template>
   <div class="reviews">
+    <h2>Reviews</h2>
+    <div>
     <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
+    </div>
   </div>
 </template>
 
