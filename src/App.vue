@@ -11,7 +11,7 @@
     <div id="footer">
       <h2>Resources</h2>
         <ul>
-          <li><a href="https://github.com/BYU-CS-260-Winter-2021/lab-1-photography-website-carlosevelo">GitHub</a></li>
+          <li><a href="https://github.com/carlosevelo/library">GitHub</a></li>
         </ul>
     </div>
   </div>
