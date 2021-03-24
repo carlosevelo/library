@@ -1,0 +1,80 @@
+<template>
+  <div class="addBook">
+    <h2>Enter New Book Info</h2>
+    <form class="newBook" name="newBook" @submit.prevent="handleNewBook">
+      <label for="title">Book Title: </label>
+      <input name="title" type="text" placeholder="Title" v-model="title"/>
+      <label for="author">Book Author: </label>
+      <input name="author" type="text" placeholder="Author" v-model="author"/>
+      <label for="published">Year of Publication: </label>
+      <input name="published" type="text" placeholder="Year" v-model="published"/>
+      <label for="genre">Book Genre: </label>
+      <input name="genre" type="text" placeholder="Genre" v-model="genre"/>
+      <label for="pages">Number of Pages: </label>
+      <input name="pages" type="number" placeholder="#" v-model="pages"/>
+      <label for="isRead">Have you already read this book? </label>
+      <input name="isRead" type="checkbox" @click="read" v-model="isRead">
+      <label v-if="read" for="review">Enter a review of the book: </label>
+      <input v-if="read" name="reveiw" type="text" placeholder="Enter a Review" v-model="review"/>
+      <button><span>Submit</span></button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "AddBook",
+  data() {
+    return {
+      title: "",
+      author: "",
+      published: "",
+      genre: "",
+      pages: "",
+      isRead: false,
+      review: "",
+    }
+  },
+  computed: {
+    read() {
+      if (this.isRead) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+  },
+  methods: {
+    handleNewBook() {
+      this.$root.$data.books.push({title: this.title, author: this.author, published: this.published, genre: this.genre, pages: this.pages, isRead: this.isRead, review: this.review});
+      this.$router.push("/");
+    }
+  }
+}
+</script>
+
+<style scoped>
+.addBook {
+  display: grid;
+  justify-items: center;
+}
+.newBook {
+  display: grid;
+  width: 300px;
+  justify-items: center;
+}
+.newBook label {
+  margin: 5px;
+}
+.newBook input {
+  width: 100px;
+  text-align: center;
+  margin: 5px;
+}
+.newBook button {
+  margin-top: 10px;
+  height: 30px;
+  width: 70px;
+}
+</style>

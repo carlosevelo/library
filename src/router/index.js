@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import WishList from "../views/WishList.vue";
 import ReadBooks from "../views/ReadBooks.vue";
 import Reviews from "../views/Reviews.vue";
+import AddBook from "../views/AddBook.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/reviews",
     name: "Reviews",
     component: Reviews,
+  },
+  {
+    path: "/addBook",
+    name: "AddBook",
+    component: AddBook,
   }
 ];
 

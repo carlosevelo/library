@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <div class="addBook">
+      <button @click="addBookView">
+        <span>Add New Book</span>
+      </button>
+    </div>
     <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
   </div>
 </template>
@@ -16,6 +21,24 @@ export default {
       books: this.$root.$data.books,
       reviewpage: false,
     }
+  },
+  methods: {
+    addBookView() {
+      return this.$router.push("/addBook");
+    }
   }
 };
 </script>
+
+<style scoped>
+.home {
+
+}
+.addBook {
+
+}
+.addBook button {
+  height: 35px;
+  width: 110px;
+}
+</style>

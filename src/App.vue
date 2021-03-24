@@ -47,9 +47,10 @@ export default {
 
 #footer {
   display: grid;
-  justify-content: center;
+  justify-items: center;
+  margin-top: 15px;
 }
-#footer li {
+#footer ul {
   text-decoration: none;
   list-style: none;
   padding: 0;
