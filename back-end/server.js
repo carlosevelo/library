@@ -37,17 +37,6 @@ const Book = mongoose.model('Book', bookSchema);
 const Genre = mongoose.model('Genre', genreSchema);
 
 // REQUESTS
-//Get all books
-app.get('/api/books', async (req, res) => {
-  try {
-    let books = await Book.find();
-    res.send(books);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-});
-
 //Get books by genre (in progress)
 app.get('/api/books/genre/:genreId', (req, res) => {
   try {
@@ -57,23 +46,6 @@ app.get('/api/books/genre/:genreId', (req, res) => {
     res.sendStatus(500);
   }
 });
-
-//Change isRead
-app.put('/api/books/:bookId', async (req, res) => {
-  try {
-    let book = await Book.findOne({_id: req.params.bookId});
-    if (!book) {
-      res.sendStatus(404);
-      return;
-    }
-    book.isRead = req.body.isRead;
-    await book.save();
-    res.send(book);
-  } catch(error) {
-    console.log(error);
-    res.sendStatus(500);
-  }
-})
 
 //Create book
 app.post('/api/books', async (req, res) => {
@@ -94,6 +66,50 @@ app.post('/api/books', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+//Get all books
+app.get('/api/books', async (req, res) => {
+  try {
+    let books = await Book.find();
+    res.send(books);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+//Change isRead (in progress)
+app.put('/api/books/:bookId', async (req, res) => {
+  try {
+    let book = await Book.findOne({_id: req.params.bookId});
+    if (!book) {
+      res.sendStatus(404);
+      return;
+    }
+    book.isRead = req.body.isRead;
+    await book.save();
+    res.send(book);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+//Delete book
+app.delete('/ap/books/:bookId', async (req, res) => {
+  try {
+    let book = await Book.findOne({_id: req.params.bookId});
+    if(!book) {
+      res.sendStatus(404);
+      return;
+    }
+    await book.delete();
+    res.sendStatus(200);
+  } catch(error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+})
 
 //LISTEN
 app.listen(3000, () => console.log('Server listening on port 3000!'));

@@ -40,7 +40,6 @@ export default {
   props: ["book", "reviewpage"],
   data() {
     return {
-      isRead: ,
       edit: false,
     }
   },
@@ -50,7 +49,6 @@ export default {
         axios.put(`/api/books/${book._id}`, {
           isRead: !book.isRead,
         });
-        
       } catch(error) {
         console.log(error);
       }

@@ -16,13 +16,25 @@ export default {
   },
   data() {
     return {
+      books: [],
       reviewpage: true 
     }
   },
-  computed: {
-    books() {
-      return this.$root.$data.books;
+  created() {
+    this.getAllBooks();
+  },
+  methods: {
+    addBookView() {
+      return this.$router.push("/addBook");
+    },
+    async getAllBooks() {
+      try {
+        const response = await axios.get("/api/books");
+        this.books = response.data;
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
-  }
+}
 </script>
