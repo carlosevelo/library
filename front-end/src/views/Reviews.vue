@@ -2,12 +2,16 @@
   <div class="reviews">
     <h2>Reviews</h2>
     <div>
-    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
+    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getAllBooks"></Books>
+    </div>
+    <div v-if="empty">
+      <p>You have no reviews!</p>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 import Books from "../components/Books.vue";
 export default {
   name: "Reviews",
@@ -17,20 +21,24 @@ export default {
   data() {
     return {
       books: [],
-      reviewpage: true 
+      reviewpage: true,
+      empty: true
     }
   },
   created() {
     this.getAllBooks();
   },
   methods: {
-    addBookView() {
-      return this.$router.push("/addBook");
-    },
     async getAllBooks() {
       try {
         const response = await axios.get("/api/books");
         this.books = response.data;
+        if (this.books.length == 0) {
+          this.empty = true;
+        }
+        else {
+          this.empty = false;
+        }
       } catch(error) {
         console.log(error);
       }

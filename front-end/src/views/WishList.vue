@@ -2,7 +2,7 @@
   <div class="wishlist">
     <h2>Wishlist</h2>
     <div>
-    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
+    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getUnreadBooks"></Books>
     </div>
     <div v-if="empty">
       <p>You have no unread books!</p>
@@ -25,11 +25,20 @@ export default {
       empty: true,
     }
   },
+  created() {
+    this.getUnreadBooks();
+  },
   methods: {
-    async getAllBooks() {
+    async getUnreadBooks() {
       try {
-        const response = await axios.get("/api/books");
+        const response = await axios.get("/api/books/unread");
         this.books = response.data;
+        if (this.books.length == 0) {
+          this.empty = true;
+        }
+        else {
+          this.empty = false;
+        }
       } catch(error) {
         console.log(error);
       }

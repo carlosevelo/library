@@ -46,9 +46,10 @@ export default {
   methods: {
     async readClick(book) {
       try {
-        axios.put(`/api/books/${book._id}`, {
+        await axios.put(`/api/books/${book._id}`, {
           isRead: !book.isRead,
         });
+        this.$emit('reload');
       } catch(error) {
         console.log(error);
       }
@@ -56,7 +57,7 @@ export default {
     async deleteBook(book) {
       try {
         await axios.delete(`/api/books/${book._id}`);
-
+        this.$emit('reload');
       } catch(error) {
         console.log(error);
       }    

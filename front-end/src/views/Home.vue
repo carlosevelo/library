@@ -6,13 +6,14 @@
         <span>Add New Book</span>
       </button>
     </div>
-    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage"></Books>
+    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getAllBooks"></Books>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Books from '../components/Books.vue';
+// import getAllBooks from './getAllBooks.js';
 export default {
   name: "Home",
   components: {

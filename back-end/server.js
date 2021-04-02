@@ -78,6 +78,28 @@ app.get('/api/books', async (req, res) => {
   }
 });
 
+//Get unread books
+app.get('/api/books/unread', async (req, res) => {
+  try {
+    let books = await Book.find({isRead: false});
+    res.send(books);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+//Get read books
+app.get('/api/books/read', async (req, res) => {
+  try {
+    let books = await Book.find({isRead: true});
+    res.send(books);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 //Change isRead (in progress)
 app.put('/api/books/:bookId', async (req, res) => {
   try {
@@ -96,7 +118,7 @@ app.put('/api/books/:bookId', async (req, res) => {
 });
 
 //Delete book
-app.delete('/ap/books/:bookId', async (req, res) => {
+app.delete('/api/books/:bookId', async (req, res) => {
   try {
     let book = await Book.findOne({_id: req.params.bookId});
     if(!book) {
