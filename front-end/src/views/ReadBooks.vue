@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import Books from "../components/Books.vue";
 export default {
   name: "ReadBooks",
@@ -19,19 +20,23 @@ export default {
   },
   data() {
     return {
+      books: [],
       reviewpage: false,
       empty: true,
     }
   },
-  computed: {
-    books() {
-      return this.$root.$data.books.filter((book) => {
-        if (book.isRead) {
-          this.empty = false;
-          return book;
-        }
-      });
+  created() {
+    this.getAllBooks();
+  },
+  methods: {
+    async getAllBooks() {
+      try {
+        const response = await axios.get("/api/books");
+        this.books = response.data;
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
-  }
+}
 </script>

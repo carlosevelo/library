@@ -13,15 +13,16 @@
       <label for="pages">Number of Pages: </label>
       <input name="pages" type="number" placeholder="#" v-model="pages"/>
       <label for="isRead">Have you already read this book? </label>
-      <input name="isRead" type="checkbox" @click="read" v-model="isRead">
-      <label v-if="read" for="review">Enter a review of the book: </label>
-      <input v-if="read" name="reveiw" type="text" placeholder="Enter a Review" v-model="review"/>
+      <input name="isRead" type="checkbox" v-model="isRead">
+      <label v-if="isRead" for="review">Enter a review of the book: </label>
+      <input v-if="isRead" name="reveiw" type="text" placeholder="Enter a Review" v-model="review"/>
       <button><span>Submit</span></button>
     </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "AddBook",
   data() {
@@ -36,19 +37,31 @@ export default {
     }
   },
   computed: {
-    read() {
-      if (this.isRead) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
+    // read() {
+    //   if (this.isRead) {
+    //     return true;
+    //   }
+    //   else {
+    //     return false;
+    //   }
+    // }
   },
   methods: {
-    handleNewBook() {
-      this.$root.$data.books.push({title: this.title, author: this.author, published: this.published, genre: this.genre, pages: this.pages, isRead: this.isRead, review: this.review});
+    async handleNewBook() {
+      try {
+        await axios.post("/api/books", {
+          title: this.title,
+          author: this.author,
+          published: this.published,
+          genre: this.genre,
+          pages: this.pages,
+          isRead: this.isRead,
+          review: this.review, 
+        });
       this.$router.push("/");
+      } catch(error) {
+        console.log(error);
+      }
     }
   }
 }

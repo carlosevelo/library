@@ -20,13 +20,13 @@
       <div v-if="reviewpage">
         <p>{{book.review}}</p>
       </div>
-      <button v-if="book.isRead" @click="readClick">
+      <button v-if="book.isRead" @click="readClick(book)">
         <span>Mark as Unread</span>
       </button>
-      <button v-else @click="readClick">
+      <button v-else @click="readClick(book)">
         <span>Mark as Read</span>
       </button>
-      <button @click="deleteBook">
+      <button @click="deleteBook(book)">
         <span>Delete Book</span>
       </button>
     </div>
@@ -34,20 +34,34 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Books",
   props: ["book", "reviewpage"],
   data() {
     return {
+      isRead: ,
       edit: false,
     }
   },
   methods: {
-    readClick() {
-      return this.book.isRead = !this.book.isRead;
+    async readClick(book) {
+      try {
+        axios.put(`/api/books/${book._id}`, {
+          isRead: !book.isRead,
+        });
+        
+      } catch(error) {
+        console.log(error);
+      }
     },
-    deleteBook() {
-      return this.$root.$data.books.splice(this.$root.$data.books.indexOf(this.book), 1);
+    async deleteBook(book) {
+      try {
+        await axios.delete(`/api/books/${book._id}`);
+
+      } catch(error) {
+        console.log(error);
+      }    
     },
   }
 }
