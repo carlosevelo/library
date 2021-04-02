@@ -100,7 +100,7 @@ app.get('/api/books/read', async (req, res) => {
   }
 });
 
-//Change isRead (in progress)
+//Change isRead
 app.put('/api/books/:bookId', async (req, res) => {
   try {
     let book = await Book.findOne({_id: req.params.bookId});

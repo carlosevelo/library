@@ -9,11 +9,36 @@
       <label for="published">Year of Publication: </label>
       <input name="published" type="text" placeholder="Year" v-model="published"/>
       <label for="genre">Book Genre: </label>
-      <input name="genre" type="text" placeholder="Genre" v-model="genre"/>
+      <!-- <input name="genre" type="text" placeholder="Genre" v-model="genre"/> -->
+      <select name="genre" v-model="genre" placeholder="Genre">
+        <option value="">Select One</option>
+        <option value="Business & Personal Finance">Business & Personal Finance</option>
+        <option value="Comics & Graphic Novels">Comics & Graphic Novels</option>
+        <option value="Computers & Internet">Computers & Internet</option>
+        <option value="Education">Education</option>
+        <option value="Fiction & Literature">Fiction & Literature</option>
+        <option value="Health, Mind & Body">Health, Mind & Body</option>
+        <option value="History">History</option>
+        <option value="Kids">Kids</option>
+        <option value="Mysteries & Thrillers">Mysteries & Thrillers</option>
+        <option value="Nonfiction">Nonfiction</option>
+        <option value="Politics & Current Events">Politics & Current Events</option>
+        <option value="Religion & Spirituality">Religion & Spirituality</option>
+        <option value="Romance">Romance</option>
+        <option value="Sci-Fi & Fantasy">Sci-Fi & Fantasy</option>
+        <option value="Sports & Outdoors">Sports & Outdoors</option>
+        <option value="Young Adult">Young Adult</option>
+        <option value="Other">Other</option>
+
+
+      </select>
       <label for="pages">Number of Pages: </label>
       <input name="pages" type="number" placeholder="#" v-model="pages"/>
       <label for="isRead">Have you already read this book? </label>
-      <input name="isRead" type="checkbox" v-model="isRead">
+      <div>
+        <input id="checkbox" name="isRead" type="checkbox" v-model="isRead">
+        <span>Yes, I've read this book</span>
+      </div>
       <label v-if="isRead" for="review">Enter a review of the book: </label>
       <input v-if="isRead" name="reveiw" type="text" placeholder="Enter a Review" v-model="review"/>
       <button><span>Submit</span></button>
@@ -35,16 +60,6 @@ export default {
       isRead: false,
       review: "",
     }
-  },
-  computed: {
-    // read() {
-    //   if (this.isRead) {
-    //     return true;
-    //   }
-    //   else {
-    //     return false;
-    //   }
-    // }
   },
   methods: {
     async handleNewBook() {
@@ -80,7 +95,7 @@ export default {
 .newBook label {
   margin: 5px;
 }
-.newBook input {
+.newBook input, select {
   width: 100px;
   text-align: center;
   margin: 5px;
@@ -89,5 +104,8 @@ export default {
   margin-top: 10px;
   height: 30px;
   width: 70px;
+}
+#checkbox {
+  width: 15px;
 }
 </style>
