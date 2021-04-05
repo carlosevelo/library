@@ -41,6 +41,7 @@ export default {
   data() {
     return {
       edit: false,
+      genre: "",
     }
   },
   methods: {

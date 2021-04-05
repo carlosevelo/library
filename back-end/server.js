@@ -27,20 +27,33 @@ const bookSchema = new mongoose.Schema({
   pages: Number,
   isRead: Boolean,
   review: String,
+  bookCollection: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Collection'
+  },
 });
 const genreSchema = new mongoose.Schema({
+  name: String,
+});
+const collectionSchema = new mongoose.Schema({
   name: String,
 });
 
 // MODELS
 const Book = mongoose.model('Book', bookSchema);
 const Genre = mongoose.model('Genre', genreSchema);
+const Collection = mongoose.model('Collection', collectionSchema);
 
 // REQUESTS
-//Get books by genre (in progress)
-app.get('/api/books/genre/:genreId', (req, res) => {
+//Get genre (in progress)
+app.get('/api/books/genre/:genreId', async (req, res) => {
   try {
-
+    let genre = await Genre.findOne({name: rez.params.genreId});
+    if(!genres) {
+      res.send(404);
+      return;
+    }
+    res.send(genre);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -49,6 +62,13 @@ app.get('/api/books/genre/:genreId', (req, res) => {
 
 //Create book
 app.post('/api/books', async (req, res) => {
+  let genre = await Genre.findOne({name: req.body.genre});
+  if(!genre) {
+    genre = new Genre({
+      name: req.body.genre,
+    })
+    await genre.save();
+  }
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -93,6 +113,17 @@ app.get('/api/books/unread', async (req, res) => {
 app.get('/api/books/read', async (req, res) => {
   try {
     let books = await Book.find({isRead: true});
+    res.send(books);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+//Get reviewed books
+app.get('/api/books/reviewed', async (req, res) => {
+  try {
+    let books = await Book.find({review: {"$exists" : true, "$ne" : ""}});
     res.send(books);
   } catch (error) {
     console.log(error);

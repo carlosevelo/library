@@ -2,7 +2,7 @@
   <div class="reviews">
     <h2>Reviews</h2>
     <div>
-    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getAllBooks"></Books>
+    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getReviewedBooks"></Books>
     </div>
     <div v-if="empty">
       <p>You have no reviews!</p>
@@ -26,12 +26,12 @@ export default {
     }
   },
   created() {
-    this.getAllBooks();
+    this.getReviewedBooks();
   },
   methods: {
-    async getAllBooks() {
+    async getReviewedBooks() {
       try {
-        const response = await axios.get("/api/books");
+        const response = await axios.get("/api/books/reviewed");
         this.books = response.data;
         if (this.books.length == 0) {
           this.empty = true;
