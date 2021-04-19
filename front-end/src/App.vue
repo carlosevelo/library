@@ -12,9 +12,10 @@
     <Login v-else />
     <div id="footer">
       <h2>Resources</h2>
-        <ul>
-          <li><a href="https://github.com/carlosevelo/library">GitHub</a></li>
-        </ul>
+      <ul>
+        <li><a href="https://github.com/carlosevelo/library">GitHub</a></li>
+      </ul>
+      <h2>Number of Hours Spent: ~3.5</h2>
     </div>
   </div>
 </template>
