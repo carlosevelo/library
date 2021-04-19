@@ -71,7 +71,7 @@ export default {
           genre: this.genre,
           pages: this.pages,
           isRead: this.isRead,
-          review: this.review, 
+          review: this.review,
         });
       this.$router.push("/");
       } catch(error) {

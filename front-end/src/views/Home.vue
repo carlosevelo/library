@@ -1,12 +1,16 @@
 <template>
-  <div class="home">
-    <h2>All Books</h2>
-    <div class="addBook">
-      <button @click="addBookView">
-        <span>Add New Book</span>
-      </button>
+  <div>
+    <div>
+      <div class="home">
+        <h2>All Books</h2>
+        <div class="addBook">
+          <button @click="addBookView">
+            <span>Add New Book</span>
+          </button>
+        </div>
+        <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getAllBooks"></Books>
+      </div>
     </div>
-    <Books v-for="book in books" :key="book.title" :book="book" :reviewpage="reviewpage" @reload="getAllBooks"></Books>
   </div>
 </template>
 
@@ -18,6 +22,7 @@ export default {
   name: "Home",
   components: {
     Books,
+    // Login,
   },
   data() {
     return {
@@ -25,8 +30,15 @@ export default {
       reviewpage: false,
     }
   },
-  created() {
-    this.getAllBooks();
+  async created() {
+    if (this.$root.$data.user) {
+      this.getAllBooks();
+    }
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
   },
   methods: {
     addBookView() {

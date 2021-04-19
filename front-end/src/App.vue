@@ -6,8 +6,10 @@
       <router-link to="/wishlist">Wish List</router-link> |
       <router-link to="/readbooks">Read Books</router-link> |
       <router-link to="/reviews">Reviews</router-link>
+      <a v-if="user" @click="logout" href="/" id="logout">Logout</a>
     </div>
-    <router-view />
+    <router-view v-if="user"/>
+    <Login v-else />
     <div id="footer">
       <h2>Resources</h2>
         <ul>
@@ -18,8 +20,34 @@
 </template>
 
 <script>
+import axios from "axios";
+import Login from './components/Login.vue';
 export default {
+  components: { Login },
   name: "App",
+  async created() {
+    try {
+      let response = await axios.get('/api/users');
+      this.$root.$data.user = response.data.user;
+    } catch (error) {
+      this.$root.$data.user = null;
+    }
+  },
+  computed: {
+    user() {
+      return this.$root.$data.user;
+    }
+  },
+  methods: {
+    async logout() {
+      try {
+        await axios.delete("/api/users");
+        this.$root.$data.user = null;
+      } catch (error) {
+        this.$root.$data.user = null;
+      }
+    }
+  }
 }
 </script>
 
@@ -46,6 +74,11 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #5ea4e9;
+}
+
+#logout {
+  float: right;
+  text-decoration: underline;
 }
 
 #footer {

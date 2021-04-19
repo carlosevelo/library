@@ -10,7 +10,7 @@
         </div>
         <div class="genre">
           <p><strong>Genre</strong></p>
-          <p>{{book.genre}}</p>
+          <p>{{book.genre.name}}</p>
         </div>
         <div class="pages">
           <p><strong>Pages</strong></p>

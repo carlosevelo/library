@@ -33,7 +33,7 @@ const routes = [
     path: "/addBook",
     name: "AddBook",
     component: AddBook,
-  }
+  },
 ];
 
 const router = new VueRouter({
